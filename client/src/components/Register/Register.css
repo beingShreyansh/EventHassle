@@ -81,7 +81,7 @@ input::-webkit-input-placeholder {
   font-size: 60px;
 }
 
-.wrap-input100 {
+.wrap-input {
   width: 100%;
   position: relative;
   border-bottom: 2px solid #adadad;

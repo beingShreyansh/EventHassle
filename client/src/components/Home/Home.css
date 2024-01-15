@@ -1,0 +1,11 @@
+.recommended-movie-heading {
+  color: rgb(73, 73, 73);
+  margin-left: 50px;
+}
+
+.movies-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
