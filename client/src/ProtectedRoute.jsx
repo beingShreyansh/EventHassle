@@ -1,21 +1,20 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
-function ProtectedRoute({ Component }) {
-  const navigate = useNavigate();
+const ProtectedRoute = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   useEffect(() => {
     let login = localStorage.getItem('accessToken');
     if (!login) {
-      navigate('/login');
-      toast.success(`Login first`);
+      toast.error('User not logged in');
+    } else {
+      setIsAuthenticated(true);
     }
-  });
-  return (
-    <>
-      <Component />
-    </>
-  );
-}
+  }, []);
+
+  return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
+};
 
 export default ProtectedRoute;

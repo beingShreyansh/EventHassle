@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -15,6 +14,10 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
+  },
+  role: {
+    type: String,
+    default: 'user',
   },
 });
 
@@ -33,7 +36,6 @@ userSchema.pre('save', async function (next) {
     return next(error);
   }
 });
-
 
 const User = mongoose.model('User', userSchema);
 

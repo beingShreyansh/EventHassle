@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import './Register.css';
 
 import { Link, useNavigate } from 'react-router-dom';
+import passwordValidations from '../../validations/passwordValidation';
 
 const apiURL = 'http://localhost:3001';
 
@@ -14,8 +15,20 @@ function Login() {
     email: '',
     password: '',
   });
-
+  const [passwordValidationResult, setPasswordValidationResult] = useState('');
+  // const [emailValidationResult, setEmailValidationResult] = useState('');
+  const [formValidation, setFormValidation] = useState(false);
   const navigate = useNavigate();
+
+  const validator = () => {
+    const validPasswordString = passwordValidations.validatePassword(
+      formData.password
+    );
+    if (validPasswordString === true) {
+      setFormValidation(true);
+      setPasswordValidationResult(false);
+    } else setPasswordValidationResult(validPasswordString);
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -25,16 +38,24 @@ function Login() {
   };
   const handleRegister = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post(`${apiURL}/auth/register`, formData);
-      if (response.status === 200) {
-        toast.success(`Registered Successfully!`);
-        navigate('/login');
+    if (formValidation) {
+      try {
+        const response = await axios.post(`${apiURL}/auth/register`, formData);
+        if (response.status === 200) {
+          toast.success(`Registered Successfully!`);
+          navigate('/login');
+        }
+      } catch (error) {
+        toast.error(`Email already Registered!`);
+        console.error('Error during login:', error);
       }
-    } catch (error) {
-      toast.error(`Email already Registered!`);
-      console.error('Error during login:', error);
     }
+    if (
+      formData.name === '' ||
+      formData.email === '' ||
+      formData.password === ''
+    )
+      toast.error('Field missing');
   };
 
   return (
@@ -43,7 +64,7 @@ function Login() {
         <div className="wrap-login100">
           <div className="login100-form">
             <span className="login100-form-title p-b-26">Welcome</span>
-            <div className="wrap-input100 validate-input">
+            <div className="wrap-input validate-input">
               <input
                 className="input100"
                 type="text"
@@ -54,7 +75,7 @@ function Login() {
               />
             </div>
 
-            <div className="wrap-input100 validate-input">
+            <div className="wrap-input validate-input">
               <input
                 className="input100"
                 type="email"
@@ -65,14 +86,20 @@ function Login() {
               />
             </div>
 
-            <div className="wrap-input100 validate-input">
+            <div className="wrap-input validate-input">
+              {passwordValidationResult && (
+                <font color="white">{passwordValidationResult}</font>
+              )}
               <input
                 className="input100"
                 type="password"
                 name="password"
                 placeholder="************"
                 value={formData.password}
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => {
+                  handleChange(e);
+                  validator();
+                }}
               />
             </div>
             <div className="btn-container">

@@ -5,7 +5,9 @@ const { signAccessToken } = require('./jwtController');
 const createUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-
+    if (!name || !email || !password) {
+      return res.status(405).send('Field Missing');
+    }
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res
@@ -32,7 +34,9 @@ const createUser = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-
+    if (!email || !password) {
+      return res.status(405).send('Field Missing');
+    }
     const user = await User.findOne({ email });
 
     if (!user) {
@@ -46,12 +50,17 @@ const loginUser = async (req, res) => {
     }
 
     const accessToken = await signAccessToken(user.email);
-
-    res.json({ accessToken });
+    const role = user.role;
+    res.json({ email, role, accessToken });
   } catch (error) {
     console.error('Error during login:', error.message);
     res.status(500).send('Server Error');
-  }
+  }   
 };
 
-module.exports = { createUser, loginUser };
+const logoutUser = (req, res) => {
+  delete accessToken;
+  res.status(200).send('Logout Successfully');
+};
+
+module.exports = { createUser, loginUser, logoutUser };
