@@ -2,10 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { Home, Login, NoPage, Register } from './components';
-// import ProtectedRoute from './ProtectedRoute';
+import {
+  Home,
+  Login,
+  NoPage,
+  Register,
+  MoviePage,
+  EventPage,
+} from './components';
+
 import { Toaster } from 'react-hot-toast';
 import Layout from './components/Layout/Layout';
+import EventBookingPage from './components/EventPage/EventBookingPage';
+
+// import ProtectedRoute from './ProtectedRoute';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +30,23 @@ const router = createBrowserRouter([
   {
     path: '/register',
     element: <Register />,
+  },
+  {
+    path: '/movie/:name',
+    element: <Layout Childeren={MoviePage} />,
+  },
+
+  {
+    path: '/movie/booking/:name',
+    element: <Layout Childeren={MoviePage} />,
+  },
+  {
+    path: '/event/:name',
+    element: <Layout Childeren={EventPage} />,
+  },
+  {
+    path: '/event/booking/:name',
+    element: <EventBookingPage />,
   },
   // {
   //   element: <ProtectedRoute />,

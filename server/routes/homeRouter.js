@@ -1,17 +1,21 @@
 const express = require('express');
 const { verifyAccessToken } = require('../controller/jwtController');
 const Movie = require('../models/movieModel');
+const Event = require('../models/eventModel');
+const {
+  getMovies,
+  getMovieByName,
+  getEvents,
+  getEventByname,
+} = require('../controller/Homecontroller');
 const router = express.Router();
 
 // Define your authentication routes here
-router.get('/getMovies', async (req, res) => {
-  try {
-    const movies = await Movie.find({});
-    res.json({ success: true, movies });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, message: 'Internal Server Error' });
-  }
-});
+router.get('/getMovies', getMovies);
+router.get('/getMovieByname/:name', getMovieByName);
+
+router.get('/getEvents', getEvents);
+router.get('/getEventByname/:name', getEventByname);
+
 
 module.exports = router;

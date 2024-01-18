@@ -46,6 +46,7 @@ function Login() {
         const response = await axios.post(`${apiURL}/auth/login`, formData);
         if (response.status === 200) {
           localStorage.setItem('accessToken', response.data.accessToken);
+          localStorage.setItem('role', response.data.role);
           navigate('/');
         }
       } catch (error) {

@@ -1,7 +1,7 @@
 .poster-img {
   /* width: 25%; */
-  /* width: 350px; */
-  height: 200px;
+  width: 15vw;
+  /* height: 200px; */
   object-fit: contain;
   aspect-ratio: 3/2;
   border-radius: 32%;

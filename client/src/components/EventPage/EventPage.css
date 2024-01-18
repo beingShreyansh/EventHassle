@@ -1,0 +1,38 @@
+.movieCard {
+  display: flex;
+  flex-direction: column;
+}
+.genres {
+  margin-right: 2;
+  display: 'flex';
+  text-align: center;
+  justify-content: center;
+  flex-grow: 1;
+  font-family: 'roboto', sans-serif;
+}
+.artist-name {
+  margin-right: 2;
+  display: 'flex';
+  text-align: center;
+  justify-content: center;
+  flex-grow: 1;
+  font-family: 'roboto', sans-serif;
+  text-transform: uppercase;
+}
+
+.event-date {
+  margin-right: 2;
+  display: 'flex';
+  text-align: center;
+  justify-content: center;
+  flex-grow: 1;
+  font-family: 'roboto', sans-serif;
+}
+.each-genre {
+  margin: 5px;
+  padding: 6px;
+  border-radius: 3px;
+  color: white;
+  font-size: 12px;
+  background-color: #888888;
+}

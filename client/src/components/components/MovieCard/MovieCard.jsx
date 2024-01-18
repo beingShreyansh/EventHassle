@@ -1,5 +1,5 @@
 import React from 'react';
-import MoviePoster from '../components/MoviePoster';
+import MoviePoster from '../MoviePoster/MoviePoster';
 import Typography from '@mui/material/Typography';
 
 import './MovieCard.css';
