@@ -1,8 +1,9 @@
-export { default as Footer } from './Footer/Footer';
+export { default as Footer } from './components/Footer/Footer.jsx';
 export { default as Home } from './Home/Home';
-export { default as Login } from './Login/Login';
-export { default as Navbar } from './Navbar/Navbar';
+export { default as Login } from './Auth/Login/Login.jsx';
 export { default as NoPage } from './NoPage/NoPage';
-export { default as Register } from './Register/Register';
+export { default as Register } from './Auth/Register/Register';
 export { default as MoviePage } from './MoviePage/MoviePage';
 export { default as EventPage } from './EventPage/EventPage.jsx';
+export { default as AdminDashboard } from './Admin/AdminDashboard/AdminDashboard.jsx';
+export { default as AddEvent } from './Admin/AddEvent/AddEvent.jsx';

@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import './Register.css';
 
 import { Link, useNavigate } from 'react-router-dom';
-import passwordValidations from '../../validations/passwordValidation';
+import passwordValidations from '../../../validations/passwordValidation';
 
 const apiURL = 'http://localhost:3001';
 

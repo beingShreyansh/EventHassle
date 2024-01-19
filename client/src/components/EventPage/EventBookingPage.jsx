@@ -21,8 +21,10 @@ const EventBookingPage = () => {
   useEffect(() => {
     const fetchVenue = async () => {
       try {
+        const accessToken = localStorage.getItem('accessToken');
         const response = await axios.get(
-          `${apiURL}/booking/getEventVenue/${name}`
+          `${apiURL}/booking/getEventVenue/${name}`,
+          { headers: { authorization: `Bearer ${accessToken}` } }
         );
         const data = response.data;
         if (response.status === 200) {

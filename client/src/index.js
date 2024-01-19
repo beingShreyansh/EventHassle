@@ -9,18 +9,20 @@ import {
   Register,
   MoviePage,
   EventPage,
+  AdminDashboard,
+  AddEvent
 } from './components';
 
 import { Toaster } from 'react-hot-toast';
 import Layout from './components/Layout/Layout';
 import EventBookingPage from './components/EventPage/EventBookingPage';
 
-// import ProtectedRoute from './ProtectedRoute';
+import ProtectedRoute from './ProtectedRoute';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout Childeren={Home} />,
+    element: <Layout Children={Home} />,
     errorElement: <NoPage />,
   },
   {
@@ -33,31 +35,36 @@ const router = createBrowserRouter([
   },
   {
     path: '/movie/:name',
-    element: <Layout Childeren={MoviePage} />,
+    element: <Layout Children={MoviePage} />,
   },
 
   {
-    path: '/movie/booking/:name',
-    element: <Layout Childeren={MoviePage} />,
-  },
-  {
     path: '/event/:name',
-    element: <Layout Childeren={EventPage} />,
+    element: <Layout Children={EventPage} />,
   },
+
   {
-    path: '/event/booking/:name',
-    element: <EventBookingPage />,
+    element: <ProtectedRoute />,
+    errorElement: <NoPage />,
+    children: [
+      {
+        path: '/admin',
+        element: <AdminDashboard />,
+      },
+      {
+        path: '/addEvent',
+        element: <AddEvent />,
+      },
+      {
+        path: '/movie/booking/:name',
+        element: <Layout Children={MoviePage} />,
+      },
+      {
+        path: '/event/booking/:name',
+        element: <EventBookingPage />,
+      },
+    ],
   },
-  // {
-  //   element: <ProtectedRoute />,
-  //   errorElement: <NoPage />,
-  //   children: [
-  //     {
-  //       path: '/',
-  //       element: <Home />,
-  //     },
-  //   ],
-  // },
 ]);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

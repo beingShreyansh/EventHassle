@@ -11,7 +11,7 @@ const ProtectedRoute = () => {
     else toast.error('user not Loggedin!');
   }, [isLoggedIn]);
 
-  return isLoggedIn ? <Outlet /> : <Navigate to="/login" replace />;
+  return isAuthenticated() ? <Outlet /> : <Navigate to="/login" replace />;
 };
 
 export default ProtectedRoute;

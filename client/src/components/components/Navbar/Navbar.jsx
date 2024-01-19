@@ -17,8 +17,8 @@ import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Logo from '../../assets/logo.png';
-import { isAuthenticated } from '../../store';
+import Logo from '../../../assets/logo.png';
+import { isAuthenticated, loggedInRole, logout } from '../../../store';
 
 const pages = ['Movies', 'Events', 'Sports'];
 const settings = ['Profile', 'Show Bookings'];
@@ -69,6 +69,7 @@ function Navbar() {
   const navigate = useNavigate();
 
   const [isLogin, setIsLogin] = React.useState(false);
+  const [userRole, setUserRole] = React.useState('');
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -93,11 +94,11 @@ function Navbar() {
     e.preventDefault();
     try {
       const accessToken = localStorage.getItem('accessToken');
-      const response = await axios.post(`${apiURL}/auth/logout`, {
-        headers: { Authorization: `Bearer ${accessToken}` },
+      const response = await axios.get(`${apiURL}/auth/logout/`, {
+        headers: { authorization: `Bearer ${accessToken}` },
       });
       if (response.status === 200) {
-        localStorage.removeItem('accessToken');
+        logout();
         navigate('/login');
       }
     } catch (error) {
@@ -105,6 +106,7 @@ function Navbar() {
     }
   };
   React.useEffect(() => {
+    setUserRole(loggedInRole);
     isAuthenticated();
     if (isAuthenticated()) setIsLogin(true);
     else setIsLogin(false);
@@ -225,6 +227,16 @@ function Navbar() {
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
+              {userRole === 'admin' && (
+                <MenuItem>
+                  <Typography
+                    textAlign="center"
+                    onClick={() => navigate('/admin')}
+                  >
+                    Admin Dashboard
+                  </Typography>
+                </MenuItem>
+              )}
               {isLogin && (
                 <MenuItem onClick={(e) => handleLogout(e)}>
                   <Typography textAlign="center">Logout</Typography>

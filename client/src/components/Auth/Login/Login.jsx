@@ -4,7 +4,7 @@ import axios from 'axios';
 import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import passwordValidations from '../../validations/passwordValidation';
+import passwordValidations from '../../../validations/passwordValidation';
 
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 
