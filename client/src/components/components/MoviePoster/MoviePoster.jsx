@@ -8,7 +8,7 @@ const MoviePoster = ({ poster, name, genre, width }) => {
         alt="poster"
         className="poster-img"
         loading="lazy"
-        style={{ width: width }}
+        style={{ width }}
       />
     </div>
   );

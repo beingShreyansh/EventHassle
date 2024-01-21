@@ -7,7 +7,6 @@ import './Register.css';
 import { Link, useNavigate } from 'react-router-dom';
 import passwordValidations from '../../../validations/passwordValidation';
 
-const apiURL = 'http://localhost:3001';
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -40,7 +39,7 @@ function Login() {
     e.preventDefault();
     if (formValidation) {
       try {
-        const response = await axios.post(`${apiURL}/auth/register`, formData);
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, formData);
         if (response.status === 200) {
           toast.success(`Registered Successfully!`);
           navigate('/login');

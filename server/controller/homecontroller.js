@@ -2,8 +2,14 @@ const Event = require('../models/eventModel');
 const Movie = require('../models/movieModel');
 
 const getMovies = async (req, res) => {
+  const { pageLimit, page } = req.body;
   try {
-    const movies = await Movie.find({});
+    const movies = await Movie.find({})
+      .select({ name: 1, genre: 1, poster: 1 })
+      .limit(pageLimit * 1)
+      .skip((page - 1) * pageLimit)
+      .sort({ releaseDate: -1 })
+      .exec();
     res.json({ success: true, movies });
   } catch (error) {
     console.error(error);
@@ -23,8 +29,14 @@ const getMovieByName = async (req, res) => {
 };
 
 const getEvents = async (req, res) => {
+  const { pageLimit, page } = req.body;
   try {
-    const events = await Event.find({});
+    const events = await Event.find({})
+      .select({ title: 1, genre: 1, poster: 1, category: 1 })
+      .limit(pageLimit * 1)
+      .skip((page - 1) * pageLimit)
+      .sort({ date: -1 })
+      .exec();
     res.json({ success: true, events });
   } catch (error) {
     console.error(error);

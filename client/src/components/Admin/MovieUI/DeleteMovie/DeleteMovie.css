@@ -1,0 +1,55 @@
+/* DeleteEvent.css */
+
+.event-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.event-form {
+  width: 80%;
+  max-width: 600px;
+  background-color: #f9f9f9; /* Light gray background */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+.event-name-box {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+.event-name-box:hover {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px;
+  background-color: #ff0101bb;
+  padding: 10px;
+  /* border: 1px solid #d94141; */
+  border-radius: 8px;
+}
+.event-name-poster {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.event-title {
+  font-size: 10px;
+}
+.event-deleteicon {
+}
+.event-deleteicon:hover {
+  cursor: pointer;
+}
+@media only screen and (max-width: 600px) {
+  .event-form {
+    width: 90%;
+  }
+}

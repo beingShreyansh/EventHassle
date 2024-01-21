@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom';
 import MoviePoster from '../components/MoviePoster/MoviePoster';
 import './MoviePage.css'; // Import a CSS file for styling
 
-const apiURL = 'http://localhost:3001';
 
 const MoviePage = () => {
   const { name } = useParams();
@@ -13,7 +12,7 @@ const MoviePage = () => {
   useEffect(() => {
     const fetchMovie = async () => {
       try {
-        const response = await axios.get(`${apiURL}/getMovieByName/${name}`);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/getMovieByName/${name}`);
         const data = response.data;
         if (response.status === 200) {
           setMovie(data.movie);

@@ -4,7 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import MoviePoster from '../components/MoviePoster/MoviePoster';
 import './EventPage.css'; // Import a CSS file for styling
 
-const apiURL = 'http://localhost:3001';
 
 const EventPage = () => {
   const navigate = useNavigate();
@@ -14,7 +13,7 @@ const EventPage = () => {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const response = await axios.get(`${apiURL}/getEventByName/${name}`);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/getEventByName/${name}`);
         const data = response.data;
         if (response.status === 200) {
           setEvent(data.event);

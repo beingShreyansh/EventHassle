@@ -4,20 +4,29 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import MovieCard from '../components/MovieCard/MovieCard';
 
-const apiURL = 'http://localhost:3001';
+const pageLimit = 5;
 
 function Home() {
   const navigate = useNavigate();
   const [movies, setMovies] = useState([]);
   const [events, setEvents] = useState([]);
 
+  const [currPage, setCurrPage] = useState(1);
+
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get(`${apiURL}/getMovies`);
+        const response = await axios.post(
+          `${process.env.REACT_APP_API_URL}/getMovies`,
+          {
+            pageLimit,
+            pageNumber: currPage,
+          }
+        );
         const data = response.data;
         if (response.status === 200) {
           setMovies(data.movies);
+          setCurrPage(data.page);
         } else {
           console.error('Failed to fetch movies:', data.message);
         }
@@ -28,8 +37,15 @@ function Home() {
 
     const fetchEvents = async () => {
       try {
-        const response = await axios.get(`${apiURL}/getEvents`);
+        const response = await axios.post(
+          `${process.env.REACT_APP_API_URL}/getEvents`,
+          {
+            pageLimit,
+            pageNumber: currPage,
+          }
+        );
         const data = response.data;
+        console.log(data);
 
         if (response.status === 200) {
           setEvents(data.events);
@@ -42,7 +58,7 @@ function Home() {
     };
     fetchMovies();
     fetchEvents();
-  }, []);
+  }, [currPage]);
 
   return (
     <div className="home-container">

@@ -10,11 +10,11 @@
 #sidebar {
   background-color: #2c3e50;
   color: #ecf0f1;
-  width: 200px;
+  width: 180px;
   height: 100%;
   position: fixed;
   top: 0;
-  left: -250px; /* Initially hide the sidebar */
+  left: -250px;
   transition: left 0.3s ease;
   overflow-y: auto;
   padding-top: 60px;
@@ -29,12 +29,13 @@
 }
 
 .sidebar-section {
-  padding: 20px;
+  padding: 5px 10px;
 }
 
-.sidebar-section h3 {
-  font-size: 1.2em;
-  margin-bottom: 10px;
+.sidebar-section-head {
+  color: #141414;
+  font-size: 1.1em;
+  margin-bottom: 5px;
 }
 
 .sidebar-section ul {
@@ -43,17 +44,17 @@
 }
 
 .sidebar-section li {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .sidebar-section a {
-  color: #ecf0f1;
+  color: #f5e6e6;
   text-decoration: none;
   font-size: 1em;
   display: block;
   padding: 10px;
   border-radius: 5px;
-  transition: background-color 0.3s;
+  transition: background-color 0.5s;
 }
 
 .sidebar-section a:hover {

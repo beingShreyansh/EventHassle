@@ -90,13 +90,15 @@ function Navbar() {
   };
 
   const handleLogout = async (e) => {
-    const apiURL = 'http://localhost:3001';
     e.preventDefault();
     try {
       const accessToken = localStorage.getItem('accessToken');
-      const response = await axios.get(`${apiURL}/auth/logout/`, {
-        headers: { authorization: `Bearer ${accessToken}` },
-      });
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/auth/logout/`,
+        {
+          headers: { authorization: `Bearer ${accessToken}` },
+        }
+      );
       if (response.status === 200) {
         logout();
         navigate('/login');

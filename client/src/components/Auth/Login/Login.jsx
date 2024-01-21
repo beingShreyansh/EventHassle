@@ -8,8 +8,6 @@ import passwordValidations from '../../../validations/passwordValidation';
 
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 
-const apiURL = 'http://localhost:3001';
-
 function Login() {
   const navigate = useNavigate();
   const [formValidation, setFormValidation] = useState(false);
@@ -43,7 +41,10 @@ function Login() {
     e.preventDefault();
     if (formValidation) {
       try {
-        const response = await axios.post(`${apiURL}/auth/login`, formData);
+        const response = await axios.post(
+          `${process.env.REACT_APP_API_URL}/auth/login`,
+          formData
+        );
         if (response.status === 200) {
           localStorage.setItem('accessToken', response.data.accessToken);
           localStorage.setItem('role', response.data.role);
@@ -53,7 +54,9 @@ function Login() {
         if (error.response.status === 402) {
           toast.error("User doesn't Exist");
         }
-        console.error('Error during login:', error);
+        if (error.response.status === 401) {
+          toast.error(error.response.data.error);
+        }
       }
     }
     if (formData.email === '' || formData.password === '')

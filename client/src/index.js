@@ -10,7 +10,10 @@ import {
   MoviePage,
   EventPage,
   AdminDashboard,
-  AddEvent
+  AddEvent,
+  DeleteEvent,
+  AddMovie,
+  DeleteMovie,
 } from './components';
 
 import { Toaster } from 'react-hot-toast';
@@ -52,8 +55,20 @@ const router = createBrowserRouter([
         element: <AdminDashboard />,
       },
       {
-        path: '/addEvent',
+        path: '/admin/addEvent',
         element: <AddEvent />,
+      },
+      {
+        path: '/admin/deleteEvent',
+        element: <DeleteEvent />,
+      },
+      {
+        path: '/admin/addMovie',
+        element: <AddMovie />,
+      },
+      {
+        path: '/admin/deleteMovie',
+        element: <DeleteMovie />,
       },
       {
         path: '/movie/booking/:name',

@@ -60,11 +60,11 @@ const addEvent = async (req, res) => {
 const deleteEventByName = async (req, res) => {
   try {
     const { title } = req.params;
-
     if (!title) {
       return res.status(405).send('Field Missing');
     }
-    const existingEvent = await Movie.findOne({ title });
+    const existingEvent = await Event.findOne({ title });
+    console.log(existingEvent);
     if (!existingEvent) {
       return res.status(400).json({ error: 'Event not found!' });
     }

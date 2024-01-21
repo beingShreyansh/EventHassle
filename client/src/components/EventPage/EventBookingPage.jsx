@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './EventBookingPage.css';
 
-const apiURL = 'http://localhost:3001';
 
 const EventBookingPage = () => {
   const { name } = useParams();
@@ -23,7 +22,7 @@ const EventBookingPage = () => {
       try {
         const accessToken = localStorage.getItem('accessToken');
         const response = await axios.get(
-          `${apiURL}/booking/getEventVenue/${name}`,
+          `${process.env.REACT_APP_API_URL}/booking/getEventVenue/${name}`,
           { headers: { authorization: `Bearer ${accessToken}` } }
         );
         const data = response.data;
@@ -71,7 +70,7 @@ const EventBookingPage = () => {
     try {
       const {
         data: { data },
-      } = await axios.post(`${apiURL}/payment/orders`, {
+      } = await axios.post(`${process.env.REACT_APP_API_URL}/payment/orders`, {
         amount: totalAmount,
       });
 
