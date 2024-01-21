@@ -22,8 +22,12 @@ const verifyAccessToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const bearerToken = authHeader.split(' ');
   const token = bearerToken[1];
+  console.log(token);
+  console.log(
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDU4MTczOTMsImV4cCI6MTcwNTgyMDk5MywiYXVkIjoic2hyZXlhbnNoQGFkbWluLmNvbSIsImlzcyI6IkV2ZW50SGFzc2xlIn0.149YxkR8z-wOAa_gHzpT6KcbjNgaoPNnHgeGj_paJwA'
+  );
   jwt.verify(token, SECRET, (err, payload) => {
-    if (err) return next('Not authorized');
+    if (err) return next('Not authorized1');
     req.payload = payload;
     next();
   });

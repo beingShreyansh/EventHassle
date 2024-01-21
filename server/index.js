@@ -4,7 +4,13 @@ const cors = require('cors');
 
 const connectDB = require('./dbConfig');
 const cookieParser = require('cookie-parser');
-const { adminRouter, authRouter, homeRouter } = require('./routes');
+const {
+  adminRouter,
+  authRouter,
+  homeRouter,
+  bookingRouter,
+  paymentRouter,
+} = require('./routes');
 
 const app = express();
 
@@ -26,7 +32,8 @@ app.use(
 app.use('/', homeRouter);
 app.use('/auth', authRouter);
 app.use('/admin', adminRouter);
-
+app.use('/booking', bookingRouter);
+app.use('/payment', paymentRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is connected at ${PORT}`);

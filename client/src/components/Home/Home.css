@@ -1,9 +1,18 @@
-.recommended-movie-heading {
+.home-container {
+}
+.recommended-heading {
   color: rgb(73, 73, 73);
   margin-left: 50px;
 }
 
-.movies-container {
+.each-card {
+  transition: 0.3s all;
+}
+.each-card:hover {
+  cursor: pointer;
+  scale: 1.2;
+}
+.card-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

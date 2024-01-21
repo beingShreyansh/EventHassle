@@ -1,0 +1,123 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+.booking-container {
+  width: 80vw;
+  margin: 0 auto;
+}
+
+h1 {
+  color: #333;
+  text-align: center;
+  margin: auto;
+}
+
+h2 {
+  color: #333;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.ticket {
+  margin: auto;
+  width: 25%;
+  border: 1px solid #cccccce4;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  flex-shrink: 1;
+}
+
+h3 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #666;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+button {
+  border: solid 1px #333;
+  padding: 5px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* button:hover {
+  background-color: #555;
+} */
+
+.proceed {
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.counter span {
+  margin: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.proceed-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* padding: 20px; */
+  margin: auto;
+  margin-top: 10px;
+  width: 20%;
+}
+
+.text {
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+  line-height: 1.2;
+}
+
+.proceed-btn {
+  background-color: red;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 18px;
+  padding: 10px 20px;
+  cursor: pointer;
+  cursor: copy;
+  width: 100%;
+}
+
+.proceed-btn-custom-style {
+  width: unset;
+}
+
+/* Add media queries below */
+
+@media (max-width: 600px) {
+  .text {
+    font-size: 18px;
+    padding: 5px;
+    margin: 5px;
+  }
+
+  .proceed-bt {
+    font-size: 14px;
+    padding: 5px 10px;
+  }
+}

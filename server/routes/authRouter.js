@@ -12,6 +12,6 @@ const { verifyAccessToken } = require('../controller/jwtController');
 // Define your authentication routes here
 router.post('/login', loginUser);
 router.post('/register', createUser);
-router.post('/logout', verifyAccessToken, logoutUser);
+router.get('/logout', logoutUser);
 
 module.exports = router;
