@@ -7,49 +7,43 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 
 const AddMovie = () => {
-  const [eventData, setEventData] = useState({
-    title: '',
-    date: '',
-    location: '',
+  const [movieData, setMovieData] = useState({
+    name: '',
+    releaseDate: '',
     poster: '',
-    attendees: [''], // Initialize with an empty string
-    description: '',
-    category: '',
-    price: 0,
+    cast: [''], // Initialize with an empty string
+    genre: [''],
+    bio: '',
   });
 
   const handleAddAttendee = () => {
-    if (eventData.attendees.length < 3) {
-      setEventData((prevData) => ({
-        ...prevData,
-        attendees: [...prevData.attendees, ''],
-      }));
-    } else {
-      toast.error('You can add a maximum of 3 artists.');
-    }
+    setMovieData((prevData) => ({
+      ...prevData,
+      cast: [...prevData.cast, ''],
+    }));
   };
 
   const handleRemoveAttendee = (index) => {
-    const updatedAttendees = [...eventData.attendees];
+    const updatedAttendees = [...movieData.cast];
     updatedAttendees.splice(index, 1);
-    setEventData((prevData) => ({
+    setMovieData((prevData) => ({
       ...prevData,
-      attendees: updatedAttendees,
+      cast: updatedAttendees,
     }));
   };
 
   const handleArtistChange = (index, value) => {
-    const updatedAttendees = [...eventData.attendees];
+    const updatedAttendees = [...movieData.cast];
     updatedAttendees[index] = value;
-    setEventData((prevData) => ({
+    setMovieData((prevData) => ({
       ...prevData,
-      attendees: updatedAttendees,
+      cast: updatedAttendees,
     }));
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setEventData((prevData) => ({
+    setMovieData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
@@ -60,8 +54,8 @@ const AddMovie = () => {
     const accessToken = localStorage.getItem('accessToken');
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_API_URL}/admin/addEvent`,
-        eventData,
+        `${process.env.REACT_APP_API_URL}/admin/addMovie`,
+        movieData,
         {
           headers: {
             authorization: `Bearer ${accessToken}`,
@@ -72,19 +66,17 @@ const AddMovie = () => {
       );
       if (res.data.msg === 'success') {
         toast.success('Event Added Successfully');
-        setEventData({
-          title: '',
-          date: '',
-          location: '',
+        setMovieData({
+          name: '',
+          releaseDate: '',
           poster: '',
-          attendees: [''],
-          description: '',
-          category: '',
-          price: 0,
+          cast: [''], // Initialize with an empty string
+          genre: [''],
+          bio: '',
         });
       }
     } catch (error) {}
-    console.log('Form submitted!', eventData);
+    console.log('Form submitted!', movieData);
   };
   return (
     <>
@@ -95,60 +87,33 @@ const AddMovie = () => {
           <div className="grid-container">
             <div className="left-column">
               <div className="form-row">
-                <label className="form-label">Title:</label>
-
+                <label className="form-label">Name:</label>
 
                 <input
                   type="text"
-                  name="title"
+                  name="name"
                   className="form-input"
-                  value={eventData.title}
+                  value={movieData.name}
                   onChange={handleInputChange}
                   required
                 />
               </div>
 
               <div className="form-row">
-                <label className="form-label">Date:</label>
+                <label className="form-label">Date of Release: </label>
                 <input
                   type="date"
-                  name="date"
+                  name="releaseDate"
                   className="form-input"
-                  value={eventData.date}
+                  value={movieData.releaseDate}
                   onChange={handleInputChange}
                   required
                 />
               </div>
 
               <div className="form-row">
-                <label className="form-label">Location:</label>
-                <input
-                  type="text"
-                  name="location"
-                  className="form-input"
-                  value={eventData.location}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              <div className="form-row">
-                <label className="form-label">Poster URL:</label>
-                <input
-                  type="text"
-                  name="poster"
-                  className="form-input"
-                  value={eventData.poster}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="right-column">
-              <div className="form-row artist-container">
                 <label className="form-label">Artist:</label>
-                {eventData.attendees.map((attendee, index) => (
+                {movieData.cast.map((attendee, index) => (
                   <div key={index} className="attendee-input-row ">
                     <div
                       className="add-remove-btn btn"
@@ -166,7 +131,53 @@ const AddMovie = () => {
                       placeholder={`Attendee ${index + 1}`}
                       required
                     />
-                    {eventData.attendees.length > 1 && (
+                    {movieData.cast.length > 1 && (
+                      <div
+                        className="add-remove-btn  btn"
+                        onClick={() => handleRemoveAttendee(index)}
+                      >
+                        -
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              <div className="form-row">
+                <label className="form-label">Poster URL:</label>
+                <input
+                  type="text"
+                  name="poster"
+                  className="form-input"
+                  value={movieData.poster}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="right-column">
+              <div className="form-row artist-container">
+                <label className="form-label">Cast:</label>
+                {movieData.cast.map((attendee, index) => (
+                  <div key={index} className="attendee-input-row ">
+                    <div
+                      className="add-remove-btn btn"
+                      onClick={handleAddAttendee}
+                    >
+                      +
+                    </div>
+                    <input
+                      type="text"
+                      className="form-input artist-input"
+                      value={attendee}
+                      onChange={(e) =>
+                        handleArtistChange(index, e.target.value)
+                      }
+                      placeholder={`Cast ${index + 1}`}
+                      required
+                    />
+                    {movieData.cast.length > 1 && (
                       <div
                         className="add-remove-btn  btn"
                         onClick={() => handleRemoveAttendee(index)}
@@ -180,33 +191,21 @@ const AddMovie = () => {
               <div className="form-row">
                 <label className="form-label">Description:</label>
                 <input
-                  name="description"
+                  name="bio"
                   className="form-input description-input"
-                  value={eventData.description}
+                  value={movieData.bio}
                   onChange={handleInputChange}
                   required
                 />
               </div>
 
               <div className="form-row">
-                <label className="form-label">Category:</label>
+                <label className="form-label">Genre:</label>
                 <input
                   type="text"
                   name="category"
                   className="form-input"
-                  value={eventData.category}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              <div className="form-row">
-                <label className="form-label">Price:</label>
-                <input
-                  type="number"
-                  name="price"
-                  className="form-input"
-                  value={eventData.price}
+                  value={movieData.category}
                   onChange={handleInputChange}
                   required
                 />
